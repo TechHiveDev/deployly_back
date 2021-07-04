@@ -23,7 +23,7 @@ export class AppService {
       const user = new CreateUserDTO();
       user.name = name;
       user.email = email;
-      user.password = bcrypt.hashSync(password,bcrypt.genSaltSync(10))
+      user.password = password
       user.isAdmin = 1;
       await this.usersService.createUser(user);
       console.log('User Created');

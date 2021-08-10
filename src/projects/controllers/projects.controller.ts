@@ -12,6 +12,11 @@ export class ProjectsController {
     private readonly projectsService : ProjectsService
   ) {}
 
+  @Get(":id")
+  getSingleProject(@Param('id') id: number) {
+    return this.projectsService.getSingleProject(id);
+  }
+
   @UseGuards(AdminGuard)
   @Post()
   async createProject(@Body() dto: ProjectCreateDto) {

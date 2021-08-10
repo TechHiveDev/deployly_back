@@ -60,7 +60,10 @@ export class Project {
 
 
 
-  @ManyToOne(()=>ProjectGroup, group => group.projects)
+  @ManyToOne(()=>ProjectGroup, group => group.projects,{
+    onUpdate: "CASCADE",
+    onDelete: "SET NULL"
+  })
   group: ProjectGroup
 
   @CreateDateColumn()

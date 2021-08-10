@@ -19,13 +19,14 @@ export class GithubService {
   async getRepoInfo(repo_url: string) {
     const repoAndAuthor = this.getRepoAndAuthorFromURL(repo_url);
     try {
-      const req = await this.httpService.get(this.gitHubAPI+`repos/${repoAndAuthor.author}/${repoAndAuthor.repo}`,{
+      const req = await this.httpService.get(this.gitHubAPI+`repos/${repoAndAuthor.author}/${repoAndAuthor.repo.replace('.git','')}`,{
         headers: {
           "Authorization": `token ${this.gitToken}`
         }
       }).toPromise()
       return req.data;
     } catch (e) {
+      console.log(e);
       throw new BadRequestException({
         message: "This GitRepo seems Not be found on Github"
       })

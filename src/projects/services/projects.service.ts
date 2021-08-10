@@ -76,4 +76,7 @@ export class ProjectsService {
     return fs.existsSync(_path);
   }
 
+  getSingleProject(id: number) {
+    return this.projectsRepo.findOneOrFail(id);
+  }
 }

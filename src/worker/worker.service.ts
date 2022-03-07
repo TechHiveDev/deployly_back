@@ -24,6 +24,9 @@ export class WorkerService {
     const eventId = `project_${project.id}`
     project.lastUpdateStatus = ProjectUpdateStatus.working
     await this.projectsRepo.save(project);
+job.stderr.on('data', function(data) {
+  console.log('stdout: ' + data);
+});
 
     job.stdout.on('data',(data) => {
       console.log(data.toString());

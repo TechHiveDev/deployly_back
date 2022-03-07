@@ -13,7 +13,7 @@ export class AppService {
   ) {
   }
 
-  @Command({command:'new:user <name> <email> <password> '})
+  @Command({command:'nw:ueser <name> <email> <password> '})
   async createUser(
     @Positional({ name: 'name', type: 'string' }) name: string,
     @Positional({ name: 'email', type: 'string' }) email: string,

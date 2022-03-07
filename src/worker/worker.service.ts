@@ -26,7 +26,6 @@ export class WorkerService {
     await this.projectsRepo.save(project);
 
     job.stdout.on('data',(data) => {
-      console.log(data.toString());
       this.workerGateway.server.emit(eventId,{
         output: data.toString(),
         status: ProjectUpdateStatus.working
@@ -38,9 +37,15 @@ export class WorkerService {
       console.log('error');
     })
 
-    job.on('close', (code,d) => {
+    job.stderr.on('data',(data) => {
+      this.workerGateway.server.emit(eventId,{
+        output: data.toString(),
+        status: ProjectUpdateStatus.working
+      });
+    })
+
+    job.on('close', (code) => {
       let status
-      console.log(d)
       if (code === 0) {
         status = ProjectUpdateStatus.success
         project.lastUpdateStatus = ProjectUpdateStatus.success
